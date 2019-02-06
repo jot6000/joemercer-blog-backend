@@ -22,6 +22,8 @@ app.get('/', (request, response) => {
 })
 app.get('/projectPreviews', db.getProjectPreviews)
 app.get('/projectPage/:urlpostfix', db.getProjectPage)
+app.get('/postPreviews', db.getPostPreviews)
+app.get('/postPage/:urlpostfix', db.getPostPage)
 
 app.listen(port, () => {
     console.log(`App running on port ${port}.`)
