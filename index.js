@@ -1,7 +1,6 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
-const port = 3000
 const db = require('./routes')
 
 app.use(bodyParser.json())
@@ -25,6 +24,8 @@ app.get('/projectPage/:urlpostfix', db.getProjectPage)
 app.get('/postPreviews', db.getPostPreviews)
 app.get('/postPage/:urlpostfix', db.getPostPage)
 
-app.listen(port, () => {
-    console.log(`App running on port ${port}.`)
-})
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 3000;
+}
+app.listen(port)

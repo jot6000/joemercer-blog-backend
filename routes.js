@@ -46,9 +46,14 @@ const getPostPage = (request, response) => {
     })
 }
 
+const addProject = (request, response) => {
+    
+}
+
 module.exports = {
     getProjectPreviews,
     getProjectPage,
     getPostPreviews,
     getPostPage,
+    addProject,
 }
