@@ -23,8 +23,8 @@ app.get('/projectPreviews', db.getProjectPreviews)
 app.get('/projectPage/:urlpostfix', db.getProjectPage)
 app.get('/postPreviews', db.getPostPreviews)
 app.get('/postPage/:urlpostfix', db.getPostPage)
-app.post('/addPost', db.getPostPage)
-app.post('/addProject', db.getPostPage)
+app.post('/addPost', db.addPost)
+app.post('/addProject', db.addProject)
 
 let port = process.env.PORT;
 if (port == null || port == "") {
