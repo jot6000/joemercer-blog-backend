@@ -79,12 +79,12 @@ const addPost = (request, response) => {
     console.log(body)
     });
 
-    /*pool.connection.query('INSERT INTO posts (title,preview,urlpostfix,content,date) VALUES ($1,$2,$3,$4,$5)', [title,preview,urlpostfix,content,date], (error, results) => {
+    pool.connection.query('INSERT INTO posts (title,preview,urlpostfix,content,date) VALUES ($1,$2,$3,$4,$5)', [title,preview,urlpostfix,content,date], (error, results) => {
         if (error) {
             throw error
         }
-        response.status(200)
-    })*/
+        response.status(200).json({title:'We did it'})
+    })
 }
 
 module.exports = {
