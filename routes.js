@@ -83,7 +83,7 @@ const addPost = (request, response) => {
         if (error) {
             throw error
         }
-        response.json({title:'We did it',body:body})
+        response.json({title:'We did it',body:body.title})
     })
 }
 
