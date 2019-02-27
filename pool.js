@@ -4,7 +4,7 @@ const Pool = require('pg').Pool
     user: 'joeme',
     host: 'localhost',
     database: 'joemercerblog',
-    password: '********',
+    password: '########',
     port: 5432,
 })*/
 

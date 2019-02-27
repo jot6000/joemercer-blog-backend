@@ -53,7 +53,7 @@ const addProject = (request, response) => {
     const urlpostfix = request.params.urlpostfix
     const content = request.params.content
 
-    pool.connection.query('INSERT INTO projects (title,preview,urlpostfix,content) VALUES ($1,$2,$3,$4)', [title,preview,urlpostfix,content], (error, results) => {
+    pool.connection.query('INSERT INTO projects (title,preview,urlpostfix,content) VALUES ($1,$2,$3,$4)', [title, preview, urlpostfix, content], (error, results) => {
         if (error) {
             throw error
         }
@@ -63,28 +63,24 @@ const addProject = (request, response) => {
 
 const addPost = (request, response) => {
 
-    const title = request.params.title
-    const preview = request.params.preview
-    const urlpostfix = request.params.urlpostfix
-    const content = request.params.content
-    const date = request.params.date
+    //Just evaluate this as true for testing purposes and switch it back when publishing
+    if(process.env.PASSPHRASE == request.body.passphrase){
+        const title = request.body.title
+        const preview = request.body.preview
+        const urlpostfix = request.body.urlpostfix
+        const content = request.body.content
+        const date = request.body.date
 
-    let body = [];
-    request.on('data', (chunk) => {
-    body.push(chunk);
-    }).on('end', () => {
-    body = Buffer.concat(body).toString();
-    // at this point, `body` has the entire request body stored in it as a string
-    console.log('Request add post:')
-    console.log(body)
-    });
-
-    pool.connection.query('INSERT INTO posts (title,preview,urlpostfix,content,date) VALUES ($1,$2,$3,$4,$5)', [title,preview,urlpostfix,content,date], (error, results) => {
-        if (error) {
-            throw error
-        }
-        response.json({title:'We did it',body:body.title})
-    })
+        pool.connection.query('INSERT INTO posts (title,preview,urlpostfix,content,date) VALUES ($1,$2,$3,$4,$5)', [title,preview,urlpostfix,content,date], (error, results) => {
+            if (error) {
+                response.status(500).json(error)
+            }
+            response.status(200).json({ succsess: 'We did it' })
+        })
+    }
+    else{
+        response.status(500).json({error:'passphrase incorrect or not provided'})
+    }
 }
 
 module.exports = {
