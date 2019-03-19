@@ -91,11 +91,64 @@ const addPost = (request, response) => {
     }
 }
 
+const editPost = (request, response) => {
+
+    //Just evaluate this as true for testing purposes and switch it back when publishing
+    //process.env.PASSPHRASE == request.body.passphrase
+    if(process.env.PASSPHRASE == request.body.passphrase){
+        const title = request.body.title
+        const preview = request.body.preview
+        const urlpostfix = request.body.urlpostfix
+        const content = request.body.content
+        const date = request.body.date
+        const oldpostfix = request.body.oldpostfix
+        
+        //UPDATE posts SET title='$1',preview='$2',urlpostfix='$3',content='$4',date='Sunday, March 09, 2008 4:05:07 PM' WHERE urlpostfix = 'SafeNPM';
+
+        pool.connection.query("UPDATE posts SET title='"+title+"',preview='"+preview+"',urlpostfix='"+urlpostfix+"',content='"+content+"',date='"+date+"' WHERE urlpostfix = '"+oldpostfix+"'", (error, results) => {
+            if (error) {
+                response.status(500).json(error)
+            }
+            response.status(200).json({ succsess: 'We did it' })
+        })
+    }
+    else{
+        response.status(500).json({error:'passphrase incorrect or not provided'})
+    }
+}
+
+const editProject = (request, response) => {
+
+    //Just evaluate this as true for testing purposes and switch it back when publishing
+    //process.env.PASSPHRASE == request.body.passphrase
+    if(process.env.PASSPHRASE == request.body.passphrase){
+        const title = request.body.title
+        const preview = request.body.preview
+        const urlpostfix = request.body.urlpostfix
+        const content = request.body.content
+        const oldpostfix = request.body.oldpostfix
+        
+        //UPDATE posts SET title='$1',preview='$2',urlpostfix='$3',content='$4',date='Sunday, March 09, 2008 4:05:07 PM' WHERE urlpostfix = 'SafeNPM';
+
+        pool.connection.query("UPDATE projects SET title='"+title+"',preview='"+preview+"',urlpostfix='"+urlpostfix+"',content='"+content+"'"+"' WHERE urlpostfix = '"+oldpostfix+"'", (error, results) => {
+            if (error) {
+                response.status(500).json(error)
+            }
+            response.status(200).json({ succsess: 'We did it' })
+        })
+    }
+    else{
+        response.status(500).json({error:'passphrase incorrect or not provided'})
+    }
+}
+
 module.exports = {
     getProjectPreviews,
     getProjectPage,
     getPostPreviews,
     getPostPage,
     addProject,
-    addPost
+    addPost,
+    editPost,
+    editProject
 }

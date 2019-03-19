@@ -25,11 +25,13 @@ app.get('/postPreviews', db.getPostPreviews)
 app.get('/postPage/:urlpostfix', db.getPostPage)
 app.post('/addPost', db.addPost)
 app.post('/addProject', db.addProject)
+app.patch('/editPost', db.editPost)
+app.patch('/editProject', db.editProject)
 
 let port = process.env.PORT;
 if (port == null || port == "") {
-  port = 3000;
+  port = 3010;
 }
 app.listen(port, () => {
     console.log(`App running on port ${port}.`)
-}) 
+})
