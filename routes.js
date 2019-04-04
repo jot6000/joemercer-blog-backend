@@ -130,7 +130,7 @@ const editProject = (request, response) => {
         
         //UPDATE posts SET title='$1',preview='$2',urlpostfix='$3',content='$4',date='Sunday, March 09, 2008 4:05:07 PM' WHERE urlpostfix = 'SafeNPM';
 
-        pool.connection.query("UPDATE projects SET title='"+title+"',preview='"+preview+"',urlpostfix='"+urlpostfix+"',content='"+content+"'"+"' WHERE urlpostfix = '"+oldpostfix+"'", (error, results) => {
+        pool.connection.query("UPDATE projects SET title='"+title+"',preview='"+preview+"',urlpostfix='"+urlpostfix+"',content='"+content+" WHERE urlpostfix = '"+oldpostfix+"'", (error, results) => {
             if (error) {
                 response.status(500).json(error)
             }
